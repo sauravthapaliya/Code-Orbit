@@ -3,30 +3,65 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Code_Orbit</title>
+    <title>@ViewData["Title"] - Code Orbit</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Code_Orbit.styles.css" asp-append-version="true" />
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #0056b3; /* Professional blue */
+        }
+
+            .navbar .nav-link {
+                color: white !important;
+                font-weight: 500;
+            }
+
+            .navbar .navbar-brand {
+                color: white !important;
+                font-weight: bold;
+            }
+
+        .navbar-toggler {
+            border-color: white;
+        }
+
+        .footer-links a {
+            color: #343a40;
+            text-decoration: none;
+        }
+
+            .footer-links a:hover {
+                text-decoration: underline;
+            }
+
+        footer {
+            background-color: #f1f3f5;
+            color: #343a40;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Code Orbit</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Course" asp-action="Index">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Index">Courses</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -34,17 +69,50 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container mt-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="py-5 mt-5">
         <div class="container">
-            &copy; 2025 - Code_Orbit - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="fw-bold text-primary">Code Orbit</h5>
+                    <p>Empowering future developers with top-tier programming resources.</p>
+                </div>
+                <div class="col-md-2 footer-links">
+                    <h5 class="fw-bold text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Course" asp-action="Index">Courses</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 footer-links">
+                    <h5 class="fw-bold text-primary">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold text-primary">Contact Us</h5>
+                    <p><i class="bi bi-envelope"></i> support@codeorbit.com</p>
+                    <p><i class="bi bi-telephone"></i> (555) 123-4567</p>
+                    <p><i class="bi bi-geo-alt"></i> 123 Coding Lane, Tech City</p>
+                </div>
+            </div>
+            <div class="text-center mt-3 border-top pt-3">
+                <p class="mb-0">&copy; 2025 Code Orbit. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
