@@ -22,8 +22,7 @@ namespace Code_Orbit.Migrations
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
-                    Syllabus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EnrollmentUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Syllabus = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Code_Orbit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250308121603_Courses")]
+    [Migration("20250308123540_Courses")]
     partial class Courses
     {
         /// <inheritdoc />
@@ -41,10 +41,6 @@ namespace Code_Orbit.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EnrollmentUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
