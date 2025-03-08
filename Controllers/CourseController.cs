@@ -10,12 +10,13 @@ namespace Code_Orbit.Controllers
         public CourseController(ApplicationDbContext db)
         {
             _db = db;
-        }   
+        }
 
         public IActionResult Index()
         {
-            List<Course> objCourseList = _db.Courses.ToList();    
-            return View(objCourseList);
+            List<Course> objCourseList = _db.Courses.ToList();
+            return View(objCourseList);  // Passing List<Course> directly to the view
         }
+
     }
 }
