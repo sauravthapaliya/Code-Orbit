@@ -15,8 +15,19 @@ namespace Code_Orbit.Controllers
         public IActionResult Index()
         {
             List<Course> objCourseList = _db.Courses.ToList();
-            return View(objCourseList);  // Passing List<Course> directly to the view
+            return View(objCourseList);
         }
 
+        // Action for the Details page
+        public IActionResult Details(int id)
+        {
+            // Fetch the course by ID
+            var course = _db.Courses.FirstOrDefault(c => c.Id == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
     }
 }

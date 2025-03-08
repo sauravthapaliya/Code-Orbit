@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <h1 class="text-center display-4">Explore Our Courses</h1>
     <div class="row">
-        @foreach (var course in Model) 
+        @foreach (var course in Model)
         {
             <div class="col-md-4 mb-4">
                 <div class="card">
@@ -14,7 +14,8 @@
                         <p><strong>Language:</strong> @course.Language</p>
                         <p><strong>Duration:</strong> @course.Duration</p>
                         <p><strong>Rating:</strong> @course.Rating / 5</p>
-                        <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-primary">Learn More</a>
+                        <!-- Link to View More -->
+                        <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-primary">View More</a>
                     </div>
                 </div>
             </div>

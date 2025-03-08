@@ -2,7 +2,6 @@
 {
     public class Course
     {
-
         public int Id { get; set; }
         public string CourseName { get; set; }
         public string Description { get; set; }
@@ -11,5 +10,8 @@
         public string Duration { get; set; }
         public int Rating { get; set; }
 
+        // New properties for the course details page
+        public string Syllabus { get; set; }  // Course syllabus or details
+        public string EnrollmentUrl { get; set; } // Link or enrollment functionality
     }
 }

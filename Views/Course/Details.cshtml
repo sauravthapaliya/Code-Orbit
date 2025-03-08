@@ -1,0 +1,118 @@
+﻿@model Code_Orbit.Models.Course
+
+<div class="container mt-4">
+    <!-- Course Header -->
+    <h1 class="text-center display-4 font-weight-bold text-primary mb-4">@Model.CourseName</h1>
+
+    <div class="row">
+        <!-- Course Image -->
+        <div class="col-md-6 mb-4">
+            <img src="@Model.ImageUrl" class="img-fluid rounded shadow-lg" alt="@Model.CourseName">
+        </div>
+
+        <!-- Course Details -->
+        <div class="col-md-6">
+            <div class="course-details">
+
+                <!-- Description Section -->
+                <div class="mb-3">
+                    <h3 class="font-weight-bold text-dark">Description</h3>
+                    <p class="lead text-muted">@Model.Description</p>
+                </div>
+
+                <!-- Language Section -->
+                <div class="mb-3">
+                    <h3 class="font-weight-bold text-dark">Language</h3>
+                    <p>@Model.Language</p>
+                </div>
+
+                <!-- Duration Section -->
+                <div class="mb-3">
+                    <h3 class="font-weight-bold text-dark">Duration</h3>
+                    <p>@Model.Duration</p>
+                </div>
+
+                <!-- Syllabus Section in Grid Layout -->
+                <div class="mb-3">
+                    <h3 class="font-weight-bold text-dark">Syllabus</h3>
+                    <div class="row">
+                        @foreach (var item in Model.Syllabus.Split(';'))
+                        {
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="card rounded shadow-sm">
+                                    <div class="card-body">
+                                        <p class="card-text">@item.Trim()</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Rating Section -->
+                <div class="mb-3">
+                    <h3 class="font-weight-bold text-dark">Rating</h3>
+                    <p class="text-muted"><strong>@Model.Rating</strong> / 5</p>
+                </div>
+
+                <!-- Enroll Button -->
+                <div>
+                    <a href="@Model.EnrollmentUrl" class="btn btn-lg btn-primary btn-block text-white font-weight-bold rounded-pill">Enroll Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS for a compact and professional UI -->
+<style>
+    .course-details h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .course-details p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 1.2rem;
+    }
+
+    .card {
+        border: none;
+        background-color: #f7f7f7;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-body {
+        padding: 1.2rem;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        font-size: 1.2rem;
+        padding: 12px;
+        border-radius: 30px;
+        background-color: #007bff;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .img-fluid {
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        max-width: 1100px;
+    }
+</style>
