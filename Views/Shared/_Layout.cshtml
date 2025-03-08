@@ -12,22 +12,33 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #0056b3; /* Professional blue */
+            background-color: #9d76f7; /* Subtle light color */
         }
 
             .navbar .nav-link {
-                color: white !important;
+                color: #ffffff !important; /* White text color for contrast */
                 font-weight: 500;
+                font-size: 1.5rem; /* Increased font size */
+                margin-right: 15px; /* Spacing between the links */
             }
 
             .navbar .navbar-brand {
-                color: white !important;
+                color: #000000 !important; /* Branding color */
                 font-weight: bold;
+                font-size: 2rem; /* Larger font for the brand */
             }
 
         .navbar-toggler {
-            border-color: white;
+            border-color: #0056b3; /* Matching toggler border color */
         }
+
+        .navbar-nav {
+            margin-left: auto; /* Aligns the nav links to the right */
+        }
+
+            .navbar-nav .nav-item {
+                margin-left: 15px; /* Additional spacing between items */
+            }
 
         .footer-links a {
             color: #343a40;
@@ -46,14 +57,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Code Orbit</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Used ms-auto to align to the right -->
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -64,7 +76,14 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <div class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    </div>
                 </div>
             </div>
         </nav>
