@@ -2,6 +2,12 @@
 
 <div class="container mt-4">
     <h1 class="text-center display-4">Explore Our Courses</h1>
+
+    <!-- Button to Create a new Course -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Create", "Course")" class="btn btn-success mb-4">Create New Course</a>
+    </div>
+
     <div class="row">
         @foreach (var course in Model)
         {
@@ -14,11 +20,20 @@
                         <p><strong>Language:</strong> @course.Language</p>
                         <p><strong>Duration:</strong> @course.Duration</p>
                         <p><strong>Rating:</strong> @course.Rating / 5</p>
+
                         <!-- Link to View More -->
                         <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-primary">View More</a>
+
+                        <!-- Edit Link -->
+                        <a href="@Url.Action("Edit", "Course", new { id = course.Id })" class="btn btn-warning mt-2">Edit</a>
+
+                        <!-- Delete Link (Confirmation before deleting) -->
+                        <a href="@Url.Action("Delete", "Course", new { id = course.Id })" class="btn btn-danger mt-2">Delete</a>
                     </div>
                 </div>
             </div>
         }
     </div>
+
+
 </div>

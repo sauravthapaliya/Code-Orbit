@@ -1,0 +1,22 @@
+﻿@model Code_Orbit.Models.Course
+
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h3>Are you sure you want to delete the course: @Model.CourseName?</h3>
+    <p><strong>Description:</strong> @Model.Description</p>
+    <p><strong>Language:</strong> @Model.Language</p>
+    <p><strong>Duration:</strong> @Model.Duration</p>
+    <p><strong>Rating:</strong> @Model.Rating</p>
+    <p><strong>Syllabus:</strong> @Model.Syllabus</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>
