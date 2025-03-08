@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Code_Orbit.Data.Migrations
+namespace Code_Orbit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250308111031_CoursesTableNewSchema")]
-    partial class CoursesTableNewSchema
+    [Migration("20250308121603_Courses")]
+    partial class Courses
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
