@@ -1,12 +1,11 @@
 ﻿// Models/ApplicationUser.cs
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Code_Orbit.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        // Add additional properties if needed (e.g., FirstName, LastName, etc.)
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }

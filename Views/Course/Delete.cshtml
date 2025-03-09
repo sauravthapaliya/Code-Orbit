@@ -15,8 +15,8 @@
     <p><strong>Syllabus:</strong> @Model.Syllabus</p>
 </div>
 
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+    <a href="@Url.Action("Index", "Course")" class="btn btn-secondary">Cancel</a>
 </form>

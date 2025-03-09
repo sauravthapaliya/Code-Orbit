@@ -17,7 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Configure Identity with Role Support
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>() // Add support for roles
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
@@ -48,7 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication(); // Ensure authentication is enabled
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -58,7 +58,6 @@ app.MapRazorPages();
 
 app.Run();
 
-// Function to create roles and an admin user
 async Task EnsureRolesAndAdminUser(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
 {
     string[] roleNames = { "Admin", "User" };
@@ -70,9 +69,8 @@ async Task EnsureRolesAndAdminUser(RoleManager<IdentityRole> roleManager, UserMa
         }
     }
 
-    // Create an admin user if it doesn't exist
     string adminEmail = "admin@codeorbit.com";
-    string adminPassword = "Admin@123"; // Change this for production
+    string adminPassword = "Admin@123"; // Change for production
 
     if (await userManager.FindByEmailAsync(adminEmail) == null)
     {

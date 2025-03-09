@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model List<Code_Orbit.Models.Course>
+
+<div class="container mt-4">
+    <h1 class="text-center display-4">Browse Courses</h1>
+
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@course.ImageUrl" class="card-img-top" alt="@course.CourseName">
+                    <div class="card-body">
+                        <h5 class="card-title">@course.CourseName</h5>
+                        <p class="card-text">@course.Description</p>
+                        <p><strong>Language:</strong> @course.Language</p>
+                        <p><strong>Duration:</strong> @course.Duration</p>
+                        <p><strong>Rating:</strong> @course.Rating / 5</p>
+                        <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

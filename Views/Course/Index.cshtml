@@ -5,13 +5,28 @@
 @model List<Code_Orbit.Models.Course>
 
 <div class="container mt-4">
-    <h1 class="text-center display-4">Explore Our Courses</h1>
+    @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+    {
+        <h1 class="text-center display-4">My Enrolled Courses</h1>
+    }
+    else
+    {
+        <h1 class="text-center display-4">Explore Our Courses</h1>
+    }
 
     <!-- Show Create Button Only for Admin -->
     @if (User.IsInRole("Admin"))
     {
         <div class="text-center mt-4">
             <a href="@Url.Action("Create", "Course")" class="btn btn-success mb-4">Create New Course</a>
+        </div>
+    }
+
+    @if (Model.Count == 0 && User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+    {
+        <div class="alert alert-info text-center">
+            You are not enrolled in any courses yet.
+            <a href="@Url.Action("Browse", "Course")">Browse Courses</a> to enroll.
         </div>
     }
 

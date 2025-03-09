@@ -1,0 +1,17 @@
+﻿@model Code_Orbit.Models.Course
+
+<div class="container mt-4">
+    <h2 class="text-center">Enroll in @Model.CourseName</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            <p><strong>Description:</strong> @Model.Description</p>
+            <p><strong>Language:</strong> @Model.Language</p>
+            <p><strong>Duration:</strong> @Model.Duration</p>
+            <p><strong>Rating:</strong> @Model.Rating / 5</p>
+        </div>
+    </div>
+    <form asp-action="EnrollConfirmed" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-success btn-lg btn-block mt-4">Confirm Enrollment</button>
+    </form>
+</div>

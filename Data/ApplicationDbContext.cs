@@ -13,5 +13,6 @@ namespace Code_Orbit.Data
         }
 
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
     }
 }
