@@ -1,17 +1,111 @@
 ﻿@model Code_Orbit.Models.Course
 
-<div class="container mt-4">
-    <h2 class="text-center">Enroll in @Model.CourseName</h2>
-    <div class="card mt-4">
-        <div class="card-body">
-            <p><strong>Description:</strong> @Model.Description</p>
-            <p><strong>Language:</strong> @Model.Language</p>
-            <p><strong>Duration:</strong> @Model.Duration</p>
-            <p><strong>Rating:</strong> @Model.Rating / 5</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Enroll in @Model.CourseName</h2>
+
+    <!-- Row for Course Info and Payment Form -->
+    <div class="row">
+        <!-- Course Information Section -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.CourseName" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.CourseName</h5>
+                    <p><strong>Description:</strong> @Model.Description</p>
+                    <p><strong>Language:</strong> @Model.Language</p>
+                    <p><strong>Duration:</strong> @Model.Duration</p>
+                    <p><strong>Rating:</strong> @Model.Rating / 5</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Information Section -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h4 class="text-center">Choose Payment Method</h4>
+                    <form asp-action="EnrollConfirmed" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+
+                        <!-- Payment Method Dropdown -->
+                        <div class="form-group">
+                            <label for="paymentMethod">Select Payment Method:</label>
+                            <select id="paymentMethod" name="paymentMethod" class="form-control" required>
+                                <option value="">--Select Payment Method--</option>
+                                <option value="eswea">Eswea</option>
+                                <option value="khalti">Khalti</option>
+                                <option value="connectIPS">Connect IPS</option>
+                                <option value="creditCard">Credit Card</option>
+                            </select>
+                        </div>
+
+                        <!-- Payment Details Section -->
+                        <div id="paymentDetails" class="mt-4" style="display:none;">
+                            <div id="esweaDetails" class="payment-option">
+                                <p><strong>Eswea Account:</strong></p>
+                                <input type="text" class="form-control" placeholder="Eswea Account ID" />
+                            </div>
+
+                            <div id="khaltiDetails" class="payment-option">
+                                <p><strong>Khalti Account:</strong></p>
+                                <input type="text" class="form-control" placeholder="Khalti Account ID" />
+                            </div>
+
+                            <div id="connectIPSDetails" class="payment-option">
+                                <p><strong>Connect IPS Account:</strong></p>
+                                <input type="text" class="form-control" placeholder="Connect IPS ID" />
+                            </div>
+
+                            <div id="creditCardDetails" class="payment-option">
+                                <p><strong>Credit Card Details:</strong></p>
+                                <input type="text" class="form-control" placeholder="Card Number" />
+                                <input type="text" class="form-control mt-2" placeholder="Expiry Date (MM/YY)" />
+                                <input type="text" class="form-control mt-2" placeholder="CVV" />
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">Confirm Enrollment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <form asp-action="EnrollConfirmed" method="post">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-success btn-lg btn-block mt-4">Confirm Enrollment</button>
-    </form>
 </div>
+
+<script>
+    // Toggle the visibility of the payment method details based on the selected payment method
+    document.getElementById('paymentMethod').addEventListener('change', function () {
+        let paymentMethod = this.value;
+        let options = document.querySelectorAll('.payment-option');
+        let paymentDetails = document.getElementById('paymentDetails');
+
+        // Hide all payment details first
+        options.forEach(function(option) {
+            option.style.display = 'none';
+        });
+
+        // Show the selected payment option details
+        if (paymentMethod === 'eswea') {
+            document.getElementById('esweaDetails').style.display = 'block';
+        } else if (paymentMethod === 'khalti') {
+            document.getElementById('khaltiDetails').style.display = 'block';
+        } else if (paymentMethod === 'connectIPS') {
+            document.getElementById('connectIPSDetails').style.display = 'block';
+        } else if (paymentMethod === 'creditCard') {
+            document.getElementById('creditCardDetails').style.display = 'block';
+        }
+
+        // Show payment details container once a payment method is selected
+        if (paymentMethod) {
+            paymentDetails.style.display = 'block';
+        } else {
+            paymentDetails.style.display = 'none';
+        }
+    });
+</script>
+
+<!-- Bootstrap 4 or 5 CSS (Ensure you're using the version of Bootstrap that suits your app) -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

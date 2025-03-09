@@ -10,7 +10,11 @@
             <div class="col-lg-8 mx-auto text-center">
                 <h1 class="display-4 fw-bold mb-4">Welcome to Code Orbit</h1>
                 <p class="lead mb-4">Launch your coding journey with our expertly crafted courses and hands-on projects.</p>
-                <a class="btn btn-light btn-lg px-4 me-2" asp-controller="Course" asp-action="Index">Browse Courses</a>
+                @{
+                    var redirectAction = User.Identity.IsAuthenticated ? "Browse" : "Index";
+                }
+
+                <a class="btn btn-light btn-lg px-4 me-2" asp-controller="Course" asp-action="@redirectAction">Browse Courses</a>
                 <a class="btn btn-outline-light btn-lg px-4" href="#features">Learn More</a>
             </div>
         </div>
