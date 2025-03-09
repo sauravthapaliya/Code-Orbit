@@ -1,0 +1,42 @@
+﻿@model List<Code_Orbit.Models.UserEnrollmentViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "User Enrollments";
+    var currentUserId = UserManager.GetUserId(User);
+}
+
+<h2>User Enrollments</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Enrolled Courses</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Where(u => u.UserId != currentUserId)) // Exclude admin
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    @if (user.EnrolledCourses.Any())
+                    {
+                        <ul>
+                            @foreach (var course in user.EnrolledCourses)
+                            {
+                                <li>@course</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>No courses enrolled</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

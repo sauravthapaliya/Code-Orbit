@@ -1,0 +1,24 @@
+﻿@model Code_Orbit.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Edit Enrollment";
+}
+
+<h2>Edit Enrollment</h2>
+
+<form asp-action="EditEnrollment" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>User</label>
+        <select asp-for="UserId" class="form-control" asp-items="@(new SelectList(ViewBag.Users, "Id", "Email"))"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Course</label>
+        <select asp-for="CourseId" class="form-control" asp-items="@(new SelectList(ViewBag.Courses, "Id", "CourseName"))"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
