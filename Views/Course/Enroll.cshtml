@@ -3,9 +3,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Enroll in @Model.CourseName</h2>
 
-    <!-- Row for Course Info and Payment Form -->
     <div class="row">
-        <!-- Course Information Section -->
         <div class="col-md-6">
             <div class="card shadow-lg">
                 <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.CourseName" style="height: 250px; object-fit: cover;">
@@ -19,7 +17,6 @@
             </div>
         </div>
 
-        <!-- Payment Information Section -->
         <div class="col-md-6">
             <div class="card shadow-lg">
                 <div class="card-body">
@@ -27,7 +24,6 @@
                     <form asp-action="EnrollConfirmed" method="post">
                         <input type="hidden" name="id" value="@Model.Id" />
 
-                        <!-- Payment Method Dropdown -->
                         <div class="form-group">
                             <label for="paymentMethod">Select Payment Method:</label>
                             <select id="paymentMethod" name="paymentMethod" class="form-control" required>
@@ -39,23 +35,19 @@
                             </select>
                         </div>
 
-                        <!-- Payment Details Section -->
                         <div id="paymentDetails" class="mt-4" style="display:none;">
                             <div id="esweaDetails" class="payment-option">
                                 <p><strong>Eswea Account:</strong></p>
                                 <input type="text" class="form-control" placeholder="Eswea Account ID" />
                             </div>
-
                             <div id="khaltiDetails" class="payment-option">
                                 <p><strong>Khalti Account:</strong></p>
                                 <input type="text" class="form-control" placeholder="Khalti Account ID" />
                             </div>
-
                             <div id="connectIPSDetails" class="payment-option">
                                 <p><strong>Connect IPS Account:</strong></p>
                                 <input type="text" class="form-control" placeholder="Connect IPS ID" />
                             </div>
-
                             <div id="creditCardDetails" class="payment-option">
                                 <p><strong>Credit Card Details:</strong></p>
                                 <input type="text" class="form-control" placeholder="Card Number" />
@@ -64,7 +56,6 @@
                             </div>
                         </div>
 
-                        <!-- Submit Button -->
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-success btn-lg">Confirm Enrollment</button>
                         </div>
@@ -76,18 +67,15 @@
 </div>
 
 <script>
-    // Toggle the visibility of the payment method details based on the selected payment method
     document.getElementById('paymentMethod').addEventListener('change', function () {
         let paymentMethod = this.value;
         let options = document.querySelectorAll('.payment-option');
         let paymentDetails = document.getElementById('paymentDetails');
 
-        // Hide all payment details first
         options.forEach(function(option) {
             option.style.display = 'none';
         });
 
-        // Show the selected payment option details
         if (paymentMethod === 'eswea') {
             document.getElementById('esweaDetails').style.display = 'block';
         } else if (paymentMethod === 'khalti') {
@@ -98,7 +86,6 @@
             document.getElementById('creditCardDetails').style.display = 'block';
         }
 
-        // Show payment details container once a payment method is selected
         if (paymentMethod) {
             paymentDetails.style.display = 'block';
         } else {
@@ -107,5 +94,4 @@
     });
 </script>
 
-<!-- Bootstrap 4 or 5 CSS (Ensure you're using the version of Bootstrap that suits your app) -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

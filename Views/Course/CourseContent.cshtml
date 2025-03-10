@@ -1,0 +1,262 @@
+﻿@model Code_Orbit.Models.Course
+
+<div class="container mt-5">
+    <h1 class="display-4 fw-bold text-primary mb-4">@Model.CourseName</h1>
+
+    <!-- Course Details -->
+    <div class="card shadow-lg mb-5">
+        <div class="card-body">
+            <h3 class="fw-bold">Course Overview</h3>
+            <p>@Model.Description</p>
+            <div class="row">
+                <div class="col-md-4"><strong>Language:</strong> @Model.Language</div>
+                <div class="col-md-4"><strong>Duration:</strong> @Model.Duration</div>
+                <div class="col-md-4"><strong>Rating:</strong> @Model.Rating / 5</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Syllabus -->
+    <div class="mb-5">
+        <h3 class="fw-bold">Syllabus</h3>
+        <div class="row">
+            @foreach (var item in Model.Syllabus.Split(';'))
+            {
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="bi bi-book text-primary fs-3 me-3"></i>
+                            <p class="mb-0">@item.Trim()</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Course Article Content -->
+    <div class="card shadow-lg mb-5">
+        <div class="card-body p-4">
+            <h2 class="fw-bold text-primary mb-4">The Evolution and Future of Artificial Intelligence</h2>
+
+            <h4 class="fw-bold mt-4">Introduction</h4>
+            <p>Artificial Intelligence (AI) is one of the most transformative technologies of the 21st century. From its inception to its present capabilities and future potential, AI has continuously evolved, reshaping industries, enhancing human lives, and revolutionizing the way we interact with machines. This article explores AI from its beginnings to its expected future impact, covering its history, key developments, current applications, ethical concerns, and what lies ahead.</p>
+
+            <h4 class="fw-bold mt-4">The Origins of AI</h4>
+            <p>The concept of AI can be traced back to ancient mythology, where artificial beings were imagined to have human-like intelligence. However, the formal birth of AI as a field of study took place in the mid-20th century. In 1956, John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon organized the Dartmouth Conference, which marked the official beginning of AI research. The goal was to create machines capable of mimicking human intelligence.</p>
+            <p>During the 1950s and 1960s, researchers developed early AI programs that could solve algebra problems, play chess, and even mimic human speech. However, due to limited computational power and data availability, progress was slow. The 1970s and 1980s saw AI face its first "AI Winter," a period of reduced funding and interest due to unmet expectations.</p>
+
+            <h4 class="fw-bold mt-4">Breakthroughs in AI</h4>
+            <p>AI made significant strides in the late 20th and early 21st centuries due to advancements in computing power, data availability, and algorithmic improvements. Some key milestones include:</p>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item border-0 ps-0"><strong>Expert Systems (1970s-1980s):</strong> These were programs designed to simulate the decision-making abilities of human experts. They were widely used in medical diagnosis and industrial automation.</li>
+                <li class="list-group-item border-0 ps-0"><strong>Machine Learning (1990s-2000s):</strong> With improved algorithms and more powerful computers, AI moved from rule-based systems to learning-based models. Support vector machines, decision trees, and neural networks became popular.</li>
+                <li class="list-group-item border-0 ps-0"><strong>Deep Learning (2010s-Present):</strong> Inspired by the human brain, deep learning utilizes artificial neural networks to process massive amounts of data. This approach led to breakthroughs in computer vision, natural language processing, and autonomous systems.</li>
+            </ul>
+
+            <h4 class="fw-bold mt-4">AI in Today's World</h4>
+            <p>AI has permeated nearly every aspect of modern life. Some of its most impactful applications include:</p>
+            <div class="row mt-3 mb-3">
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-heart-pulse text-danger me-2"></i>Healthcare</h5>
+                            <p class="card-text">AI-powered tools assist in disease diagnosis, drug discovery, and personalized treatment plans. AI models analyze medical images and detect diseases such as cancer at an early stage.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-currency-dollar text-success me-2"></i>Finance</h5>
+                            <p class="card-text">AI-driven algorithms are used for fraud detection, risk assessment, and automated trading, making financial processes more efficient and secure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-car-front text-primary me-2"></i>Transportation</h5>
+                            <p class="card-text">Self-driving cars, traffic management systems, and ride-sharing apps rely on AI for navigation, safety, and efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-film text-warning me-2"></i>Entertainment</h5>
+                            <p class="card-text">AI personalizes content recommendations on platforms like Netflix, Spotify, and YouTube.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-headset text-info me-2"></i>Customer Service</h5>
+                            <p class="card-text">Chatbots and virtual assistants, such as Siri and Alexa, improve user experience by providing instant support.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-robot text-secondary me-2"></i>Manufacturing</h5>
+                            <p class="card-text">AI-powered robots enhance productivity, quality control, and predictive maintenance in factories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="fw-bold mt-4">Ethical Concerns and Challenges</h4>
+            <p>Despite AI's immense benefits, it raises several ethical and societal concerns:</p>
+            <div class="accordion mb-4" id="aiEthicsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#jobDisplacement">
+                            Job Displacement
+                        </button>
+                    </h2>
+                    <div id="jobDisplacement" class="accordion-collapse collapse" data-bs-parent="#aiEthicsAccordion">
+                        <div class="accordion-body">
+                            Automation powered by AI threatens traditional jobs, particularly in industries like manufacturing, customer service, and transportation.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#biasFairness">
+                            Bias and Fairness
+                        </button>
+                    </h2>
+                    <div id="biasFairness" class="accordion-collapse collapse" data-bs-parent="#aiEthicsAccordion">
+                        <div class="accordion-body">
+                            AI models can inherit biases from training data, leading to unfair or discriminatory outcomes, particularly in hiring, law enforcement, and lending.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacySurveillance">
+                            Privacy and Surveillance
+                        </button>
+                    </h2>
+                    <div id="privacySurveillance" class="accordion-collapse collapse" data-bs-parent="#aiEthicsAccordion">
+                        <div class="accordion-body">
+                            AI-driven facial recognition and data tracking raise privacy concerns, leading to debates on government and corporate surveillance.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#autonomousWeapons">
+                            Autonomous Weapons
+                        </button>
+                    </h2>
+                    <div id="autonomousWeapons" class="accordion-collapse collapse" data-bs-parent="#aiEthicsAccordion">
+                        <div class="accordion-body">
+                            The potential use of AI in warfare poses a significant threat, as autonomous weapons could make life-or-death decisions without human intervention.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accountability">
+                            Accountability
+                        </button>
+                    </h2>
+                    <div id="accountability" class="accordion-collapse collapse" data-bs-parent="#aiEthicsAccordion">
+                        <div class="accordion-body">
+                            When AI systems make decisions, it is challenging to determine accountability in case of errors or harm.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="fw-bold mt-4">The Future of AI</h4>
+            <p>AI is expected to continue its rapid development, leading to even greater transformations across industries. Some anticipated advancements include:</p>
+            <div class="row mt-3 mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-robot me-2"></i>General AI</h5>
+                            <p class="card-text">Unlike current AI, which is narrow and task-specific, General AI aims to possess human-like intelligence and reasoning capabilities across a wide range of tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-microscope me-2"></i>AI in Scientific Discovery</h5>
+                            <p class="card-text">AI will accelerate research in medicine, climate change, and physics, helping scientists solve complex problems faster.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-people me-2"></i>Human-AI Collaboration</h5>
+                            <p class="card-text">Rather than replacing humans, AI will augment human capabilities, leading to new job opportunities and enhanced decision-making.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-shield-check me-2"></i>AI Ethics and Regulations</h5>
+                            <p class="card-text">Governments and organizations will implement stricter regulations to ensure responsible AI development and deployment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-brush me-2"></i>AI and Creativity</h5>
+                            <p class="card-text">AI-generated art, music, and literature will become more sophisticated, blurring the lines between human and machine creativity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="fw-bold mt-4">Conclusion</h4>
+            <div class="card bg-light border-0 p-3 mb-3">
+                <p>From its early theoretical roots to its current widespread applications, AI has come a long way. It continues to shape the world in ways we never imagined, offering incredible opportunities while presenting ethical dilemmas. As AI advances, it is crucial to ensure that it is developed responsibly, benefiting humanity as a whole while mitigating its risks. The future of AI is undoubtedly exciting, and its impact will only continue to grow in the coming decades.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="@Url.Action("Index", "Course")" class="btn btn-outline-primary mb-5">Back to Courses</a>
+</div>
+
+<style>
+    iframe {
+        width: 100%;
+        min-height: 400px;
+    }
+
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-fluid {
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #f0f7ff;
+        color: #0d6efd;
+    }
+
+    .list-group-item {
+        background-color: transparent;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

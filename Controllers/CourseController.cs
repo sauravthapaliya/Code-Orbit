@@ -9,6 +9,12 @@ using System.Security.Claims;
 
 namespace Code_Orbit.Controllers
 {
+    public class CourseDetailsViewModel
+    {
+        public Course Course { get; set; }
+        public bool IsEnrolled { get; set; }
+    }
+
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -20,8 +26,6 @@ namespace Code_Orbit.Controllers
             _userManager = userManager;
         }
 
-        // When no user is logged in or when the logged-in user is an Admin,
-        // show all courses. For a normal logged-in user, show only enrolled courses.
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
@@ -47,10 +51,24 @@ namespace Code_Orbit.Controllers
         {
             var course = _db.Courses.FirstOrDefault(c => c.Id == id);
             if (course == null) return NotFound();
-            return View(course);
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            bool isEnrolled = false;
+
+            if (User.Identity.IsAuthenticated && userId != null)
+            {
+                isEnrolled = _db.Enrollments.Any(e => e.CourseId == id && e.UserId == userId);
+            }
+
+            var viewModel = new CourseDetailsViewModel
+            {
+                Course = course,
+                IsEnrolled = isEnrolled
+            };
+
+            return View(viewModel);
         }
 
-        // ADMIN: Create a new course
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
@@ -71,7 +89,6 @@ namespace Code_Orbit.Controllers
             return View(course);
         }
 
-        // ADMIN: Edit an existing course
         [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
@@ -96,7 +113,6 @@ namespace Code_Orbit.Controllers
             return View(course);
         }
 
-        // ADMIN: Delete a course
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
@@ -118,9 +134,6 @@ namespace Code_Orbit.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // --- Enrollment Functionality for Normal Users ---
-
-        // GET: Course/Enroll/5 - Display enrollment confirmation page
         [Authorize]
         public IActionResult Enroll(int id)
         {
@@ -134,14 +147,12 @@ namespace Code_Orbit.Controllers
             var existingEnrollment = _db.Enrollments.FirstOrDefault(e => e.CourseId == id && e.UserId == userId);
             if (existingEnrollment != null)
             {
-                // If already enrolled, redirect to course details (or a My Courses page)
-                return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("CourseContent", new { id = id });
             }
 
             return View(course);
         }
 
-        // POST: Course/EnrollConfirmed/5 - Process enrollment confirmation
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -162,7 +173,7 @@ namespace Code_Orbit.Controllers
             var existingEnrollment = _db.Enrollments.FirstOrDefault(e => e.CourseId == id && e.UserId == userId);
             if (existingEnrollment != null)
             {
-                return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("CourseContent", new { id = id });
             }
 
             Enrollment newEnrollment = new Enrollment
@@ -174,11 +185,9 @@ namespace Code_Orbit.Controllers
             _db.Enrollments.Add(newEnrollment);
             _db.SaveChanges();
 
-            // After enrolling, redirect to the Index which for normal users shows only enrolled courses.
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("CourseContent", new { id = id });
         }
 
-        // GET: Course/Browse - Show courses that the user has not enrolled in yet.
         [Authorize]
         public IActionResult Browse()
         {
@@ -191,6 +200,20 @@ namespace Code_Orbit.Controllers
                              .Where(c => !enrolledCourseIds.Contains(c.Id))
                              .ToList();
             return View(courses);
+        }
+
+        [Authorize]
+        public IActionResult CourseContent(int id)
+        {
+            var course = _db.Courses.FirstOrDefault(c => c.Id == id);
+            if (course == null) return NotFound();
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var isEnrolled = _db.Enrollments.Any(e => e.CourseId == id && e.UserId == userId);
+
+            if (!isEnrolled) return RedirectToAction("Details", new { id = id });
+
+            return View(course);
         }
     }
 }

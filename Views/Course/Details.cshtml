@@ -1,4 +1,4 @@
-﻿@model Code_Orbit.Models.Course
+﻿@model Code_Orbit.Controllers.CourseDetailsViewModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -6,46 +6,56 @@
 <div class="container mt-5">
     <!-- Course Header -->
     <div class="text-center">
-        <h1 class="display-4 fw-bold text-primary">@Model.CourseName</h1>
-        <p class="text-muted lead">Learn and master @Model.CourseName with expert guidance</p>
+        <h1 class="display-4 fw-bold text-primary">@Model.Course.CourseName</h1>
+        <p class="text-muted lead">Learn and master @Model.Course.CourseName with expert guidance</p>
     </div>
 
     <div class="row align-items-center mt-4">
         <!-- Course Image -->
         <div class="col-md-5">
-            <img src="@Model.ImageUrl" class="img-fluid rounded shadow-lg w-100" alt="@Model.CourseName">
+            <img src="@Model.Course.ImageUrl" class="img-fluid rounded shadow-lg w-100" alt="@Model.Course.CourseName">
         </div>
 
         <!-- Course Details -->
         <div class="col-md-7">
             <div class="course-details p-4 shadow-sm rounded bg-light">
                 <h3 class="fw-bold text-dark">Course Overview</h3>
-                <p class="text-muted">@Model.Description</p>
+                <p class="text-muted">@Model.Course.Description</p>
 
                 <div class="row">
                     <div class="col-sm-6">
                         <h5 class="fw-bold text-dark">Language</h5>
-                        <p class="text-muted">@Model.Language</p>
+                        <p class="text-muted">@Model.Course.Language</p>
                     </div>
                     <div class="col-sm-6">
                         <h5 class="fw-bold text-dark">Duration</h5>
-                        <p class="text-muted">@Model.Duration</p>
+                        <p class="text-muted">@Model.Course.Duration</p>
                     </div>
                 </div>
 
                 <h5 class="fw-bold text-dark">Rating</h5>
                 <p class="text-muted">
-                    ⭐ <strong>@Model.Rating</strong> / 5
+                    ⭐ <strong>@Model.Course.Rating</strong> / 5
                 </p>
 
-                <!-- Enroll Button for non-admin users -->
+                <!-- Conditional Enrollment Button -->
                 @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
                 {
-                    <a href="@Url.Action("Enroll", "Course", new { id = Model.Id })" class="btn btn-lg btn-primary w-100 fw-bold shadow">Enroll Now</a>
+                    if (!Model.IsEnrolled)
+                    {
+                        <a href="@Url.Action("Enroll", "Course", new { id = Model.Course.Id })"
+                           class="btn btn-lg btn-primary w-100 fw-bold shadow">Enroll Now</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("CourseContent", "Course", new { id = Model.Course.Id })"
+                           class="btn btn-lg btn-success w-100 fw-bold shadow">Go to Course</a>
+                    }
                 }
                 else if (!User.Identity.IsAuthenticated)
                 {
-                    <a href="@Url.Page("/Account/Login", new { area = "Identity" })" class="btn btn-lg btn-outline-primary w-100 fw-bold">Login to Enroll</a>
+                    <a href="@Url.Page("/Account/Login", new { area = "Identity" })"
+                       class="btn btn-lg btn-outline-primary w-100 fw-bold">Login to Enroll</a>
                 }
             </div>
         </div>
@@ -55,7 +65,7 @@
     <div class="mt-5">
         <h3 class="fw-bold text-dark">Course Syllabus</h3>
         <div class="row">
-            @foreach (var item in Model.Syllabus.Split(';'))
+            @foreach (var item in Model.Course.Syllabus.Split(';'))
             {
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card shadow-sm border-0">
@@ -113,5 +123,4 @@
     }
 </style>
 
-<!-- Bootstrap Icons (Optional) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">

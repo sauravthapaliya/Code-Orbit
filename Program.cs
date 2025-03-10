@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure database connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -15,7 +14,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// Configure Identity with Role Support
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -24,7 +22,6 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Create roles and an admin user on startup
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -70,7 +67,7 @@ async Task EnsureRolesAndAdminUser(RoleManager<IdentityRole> roleManager, UserMa
     }
 
     string adminEmail = "admin@codeorbit.com";
-    string adminPassword = "Admin@123"; // Change for production
+    string adminPassword = "Admin@123";
 
     if (await userManager.FindByEmailAsync(adminEmail) == null)
     {
